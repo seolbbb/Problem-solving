@@ -18,6 +18,9 @@ for i in range(1,7):
         if 1 <= dic[(j,i)] <= k:
             cnt += 1
         else:
-            cnt += (dic[(j,i)] // k) + 1
+            if k == 1:
+                cnt += dic[(j,i)]
+            else:
+                cnt += (dic[(j,i)] + k - 1) // k
             
 print(cnt)
