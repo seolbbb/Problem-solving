@@ -1,13 +1,14 @@
-def POW(a,b,c):
+def pow(a,b,c):
     if b == 1:
         return a % c
-    val = POW(a,b//2,c)
-    val = val * val % c
+    
+    val = pow(a,b//2,c)
     if b % 2 == 0:
-        return val
+        return val*val%c
     else:
-        return val * a % c    
+        return val*val*a%c
 
-a, b, c = map(int,input().split())
 
-print(POW(a,b,c))
+a,b,c = map(int,input().split())
+
+print(pow(a,b,c))
