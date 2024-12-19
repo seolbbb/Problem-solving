@@ -9,16 +9,10 @@ dp[1] = lst[0]
 
 for i in range(2,n+1):
     current = lst[i-1]
-    maxdp = []
-    num = i-2
-
-    while True:
-        if current > lst[num]:
-            maxdp.append(dp[num+1] + current)
-        elif num <= 0:
-            maxdp.append(current)
-            break   
-        num -= 1
-    dp[i] = max(maxdp)
+    for j in range(i-1):
+        if current > lst[j]:
+            dp[i] = max(dp[i],dp[j+1]+current)
+    if dp[i] == 0:
+        dp[i] = current
 
 print(max(dp))
