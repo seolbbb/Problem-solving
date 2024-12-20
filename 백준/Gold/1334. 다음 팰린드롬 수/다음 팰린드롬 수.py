@@ -11,23 +11,19 @@ elif m == 9:
     exit(0)
 
 length = len(n)
-half_length = (length + 1) // 2
-
+half_length = (length+1) // 2
 
 first_half = n[:half_length]
 if length % 2 == 0:
     palindrome = first_half + first_half[::-1]
 else:
-    palindrome = first_half + first_half[-2::-1]
-
+    palindrome = first_half + first_half[::-1][1:]
 
 if int(palindrome) > m:
     print(palindrome)
 else:
-
     first_half = str(int(first_half) + 1)
     if len(first_half) > half_length:
-
         if length % 2 == 0:
             palindrome = first_half + first_half[::-1][1:]
         else:
@@ -36,5 +32,5 @@ else:
         if length % 2 == 0:
             palindrome = first_half + first_half[::-1]
         else:
-            palindrome = first_half + first_half[-2::-1]
+            palindrome = first_half + first_half[::-1][1:]
     print(palindrome)
