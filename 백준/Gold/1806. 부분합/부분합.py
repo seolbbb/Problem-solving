@@ -10,9 +10,6 @@ length = 100001
 cnt = 1
 
 while True:
-    if partial >= s and head == tail:
-        length = 1
-        break
     while partial < s and head < n-1:
         head += 1
         partial += seq[head]
