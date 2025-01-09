@@ -33,8 +33,6 @@ dijkstra(st)
 
 for i in range(1,v+1):
     if dist[i] == float('inf'):
-        lst.append('INF')
+        print('INF')
     else:
-        lst.append(dist[i])
-
-print(*lst,sep = '\n')
+        print(dist[i])
