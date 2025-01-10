@@ -1,8 +1,10 @@
 import heapq
 
 n, k = map(int,input().split())
-dx = [(0,n),(1,1),(1,-1)]
 dist = [float('inf') for _ in range(200001)]
+# 시간복잡도 줄이기 위해 dist 배열의 크기를 k * 2 + 1 로 바꿨는데 오류가 뜸.
+# n이 k보다 클 경우도 생각해야 하기 때문
+
 hq = [(0,n)]
 dist[n] = 0
 
