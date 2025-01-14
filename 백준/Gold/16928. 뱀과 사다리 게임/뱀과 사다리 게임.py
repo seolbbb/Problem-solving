@@ -25,7 +25,7 @@ while queue:
             continue
         if skip[nx] > 0:
             nx = skip[nx]
-        if dist[nx] >= 0 and dist[nx] < dist[x] + 1:
+        if dist[nx] >= 0:
             continue
         dist[nx] = dist[x] + 1
         queue.append(nx)
