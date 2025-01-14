@@ -15,6 +15,10 @@ dist[1] = 0
 
 while queue:
     x = queue.popleft()
+
+    if x == 100:
+        break
+
     for i in range(1,7):
         nx = x + i
         if nx > 100:
