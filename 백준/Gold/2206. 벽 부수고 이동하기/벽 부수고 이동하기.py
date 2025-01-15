@@ -20,7 +20,7 @@ def bfs():
             if board[nx][ny] == 0 and dist[nx][ny][used] == -1:
                 dist[nx][ny][used] = dist[x][y][used] + 1
                 queue.append((nx,ny,used))
-            elif board[nx][ny] == 1 and used == 0 and dist[nx][ny][1] == -1:
+            elif board[nx][ny] == 1 and used == 0:
                 dist[nx][ny][1] = dist[x][y][used] + 1
                 queue.append((nx,ny,1))
 
