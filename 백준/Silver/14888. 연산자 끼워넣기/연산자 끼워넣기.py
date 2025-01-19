@@ -1,51 +1,39 @@
-def insert_op():
-    if len(lst) == n-1 and tuple(lst) not in used2:
-        used2[tuple(lst)] = 1
-        m = arr[0]
+import sys
+input = sys.stdin.readline
 
-        for i in range(n-1):
-            if lst[i] == '+':
-                m = m + arr[i+1]
-            elif lst[i] == '-':
-                m = m - arr[i+1]
-            elif lst[i] == '*':
-                m = m * arr[i+1]
-            else:
-                if m < 0:
-                    m = -(-m // arr[i+1])
-                else:
-                    m = m // arr[i+1]
-        res.append(m)
+def calc(a, b, op_type):
+    # op_type: 0->+, 1->-, 2->*, 3->/
+    if op_type == 0:
+        return a + b
+    elif op_type == 1:
+        return a - b
+    elif op_type == 2:
+        return a * b
+    else:  
+        if a < 0:
+            return -(-a // b)
+        else:
+            return a // b
 
-    for i in range(n-1):
-        if used[i] == 1:
-            continue
-        lst.append(op2[i])
-        used[i] = 1
-        insert_op()
-        lst.pop()
-        used[i] = 0
+def dfs(idx, value):
+
+    if idx == n-1:
+        results.append(value)
+        return
+
+    for i in range(4):
+        if operators[i] > 0:
+            operators[i] -= 1
+            new_value = calc(value, arr[idx+1], i)
+            dfs(idx+1, new_value)
+            operators[i] += 1
 
 n = int(input())
-arr = list(map(int,input().split()))
-op = list(map(int,input().split()))
-op2 = []
-lst = []
-used = [0 for _ in range(n-1)]
-used2 = {}
-res = []
+arr = list(map(int, input().split()))
+operators = list(map(int, input().split()))
+results = []
 
+dfs(0, arr[0])
 
-for i in range(op[0]):
-    op2.append('+')
-for i in range(op[1]):
-    op2.append('-')
-for i in range(op[2]):
-    op2.append('*')
-for i in range(op[3]):
-    op2.append('/')
-
-insert_op()
-
-print(max(res))
-print(min(res))
+print(max(results))
+print(min(results))
