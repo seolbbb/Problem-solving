@@ -5,7 +5,13 @@ def union(a, b):
     pa = find(a)
     pb = find(b)
     if pa != pb:
-        parent[pa] = pb
+        if rank[pa] > rank[pb]:
+            parent[pb] = pa
+        elif rank[pb] > rank[pa]:
+            parent[pa] = pb
+        else:
+            parent[pa] = pb
+            rank[pb] += 1
 
 def find(a):
     if a != parent[a]:
@@ -15,6 +21,7 @@ def find(a):
 n = int(input())
 m = int(input())
 parent = [i for i in range(n+1)]
+rank = [0 for _ in range(n+1)]
 graph = [list(map(int,input().split())) for _ in range(n)]
 
 for i in range(n):
