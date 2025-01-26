@@ -24,11 +24,7 @@ ans = 0
 for plane in planes:
     if find(plane) == 0:
         break
-    if plane == find(plane):
-        union(plane, plane-1)
-        ans += 1
-    else:
-        union(find(plane), find(plane)-1)
-        ans += 1
+    union(find(plane), find(plane)-1)
+    ans += 1
 
 print(ans)
