@@ -1,31 +1,25 @@
-def dfs(x, y):
-    global r, c, ans
-    move = 0
+dp = {}
 
-    for dx, dy in [(0,1), (1,0), (0,-1), (-1,0)]:
-        nx = x + dx
-        ny = y + dy
-        if nx < 0 or nx >= r or ny <0 or ny >= c:
-            continue
-        if used[ord(board[nx][ny])-65] == 1:
-            continue
-        move = 1
-        used[ord(board[nx][ny])-65] = 1
-        dfs(nx,ny)
-        used[ord(board[nx][ny])-65] = 0
+def dfs(x, y, mask):
+    if (x, y, mask) in dp:
+        return dp[(x, y, mask)]
     
-    if move == 0:
-        cnt = 0
-        for n in used:
-            if n == 1:
-                cnt += 1
-        ans = max(ans, cnt)
+    dp[(x, y, mask)] = 1
+    for dx, dy in [(0,1),(1,0),(0,-1),(-1,0)]:
+        nx, ny = x+dx, y+dy
+        if 0 <= nx < r and 0 <= ny < c:
+            alpha_idx = ord(board[nx][ny]) - ord('A')
+            nxt_bit = (1 << alpha_idx)
+            if not (mask & nxt_bit):
+                dp[(x, y, mask)] = max(dp[(x, y, mask)],
+                                       1 + dfs(nx, ny, mask | nxt_bit))
+    return dp[(x, y, mask)]
 
 r, c = map(int, input().split())
-board = [list(input()) for _ in range(r)]
-used = [0 for _ in range(26)]
-ans = 0
+board = [input().rstrip() for _ in range(r)]
 
-used[ord(board[0][0])-65] = 1
-dfs(0, 0)
+start_char = board[0][0]
+start_mask = 1 << (ord(start_char) - ord('A'))
+
+ans = dfs(0, 0, start_mask)
 print(ans)
