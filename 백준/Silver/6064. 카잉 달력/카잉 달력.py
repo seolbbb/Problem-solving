@@ -1,8 +1,9 @@
+import math
 t = int(input())
 
 for _ in range(t):
     m, n, x, y = map(int, input().split())
-    bound = m*n
+    bound = int(m*n/math.gcd(m, n))
     k = x
     valid = 0
     while k <= bound:
