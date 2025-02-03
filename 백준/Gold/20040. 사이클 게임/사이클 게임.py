@@ -26,12 +26,10 @@ ans = 0
 for i in range(1, m+1):
     a, b = map(int, input().split())
 
-    if ans > 0:
-        continue
-
     if find(a) != find(b):
         union(a, b)
     else:
         ans = i
+        break
 
 print(ans)
