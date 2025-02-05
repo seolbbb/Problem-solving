@@ -1,11 +1,10 @@
-a, b = map(int, input().split())
+a,b=map(int,input().split())
 
-if a > 0 and b < 0:
-    print(-(a//b))
-    print(a%b)
-elif a < 0 and b < 0:
-    print(-(a//-b))
-    print(a%-b)
-else:
-    print(a//b)
-    print(a%b)
+x=a//b
+
+while a-b*x<0:
+    if b<0:x+=1
+    else:x-=1
+    
+print(x)
+print(a-b*x)
