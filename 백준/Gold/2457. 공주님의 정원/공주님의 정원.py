@@ -18,14 +18,17 @@ for _ in range(n):
     heapq.heappush(flowers, [a*100 + b, c*100 + d])
 
 while flowers:
+    # 빈 list에 시작일이 start보다 작은 꽃들 모두 저장
     lst = []
-    
     while flowers and flowers[0][0] <= start:
         lst.append(heapq.heappop(flowers))
+    # 시작일이 start보다 작은 꽃이 없으면 조건 만족 x -> break
     if len(lst) == 0:
         break
+    # 위에서 구한 가능한 꽃들 중 끝나는 날이 가장 큰 꽃으로 start 갱신
     cnt += 1
     start = sorted(lst, reverse= True, key= lambda x:x[1])[0][1]
+    # 끝나는 날이 11월30일 이후라면 break
     if start >= 1201:
         ans = 1
         break
