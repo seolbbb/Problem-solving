@@ -1,46 +1,48 @@
-from collections import deque
 import sys
-sys.setrecursionlimit(10000)
+from collections import deque
+sys.setrecursionlimit(10**7)
+input = sys.stdin.readline
 
-def dfs(cur):
-    vis[cur] = 1
-    print(cur, end = ' ')
-    for nxt in adj[cur]:
-        if vis[nxt]:
+def dfs(node):
+    visit[node] = 1
+    dfs_lst.append(node)
+    for nxt in graph[node]:
+        if visit[nxt]:
             continue
         dfs(nxt)
 
-def bfs():
-    queue.append(l)
-    vis[l] = 1
-    while queue:
-        cur = queue.popleft()
-        print(cur, end = ' ')
-        for nxt in adj[cur]:
-            if vis[nxt]:
-                continue
-            queue.append(nxt)
-            vis[nxt] = 1
-
-n, m, l = map(int,input().split())
-
-adj = [[] for _ in range(1001)]
-vis = [0 for _ in range(1001)]
-queue = deque()
+n, m, v = map(int, input().split())
+graph = [[] for _ in range(n+1)]
+visit = [0 for _ in range(n+1)]
 dfs_lst = []
 bfs_lst = []
 
-for i in range(1,m+1):
-    u, v = map(int,input().split())
-    adj[u].append(v)
-    adj[v].append(u)
+for _ in range(m):
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-for i in range(1,n+1):
-    adj[i].sort()
+for i in range(1, n+1):
+    graph[i].sort()
 
-# DFS 수행
-dfs(l)
-vis = [0 for _ in range(1001)]
-print('')
-# BFS 수행
-bfs()
+dfs(v)
+
+# bfs
+
+visit = [0 for _ in range(n+1)]
+queue = deque([v])
+visit[v] = 1
+
+while queue:
+    cur = queue.popleft()
+    bfs_lst.append(cur)
+
+    for nxt in graph[cur]:
+        if visit[nxt]:
+            continue
+        visit[nxt] = 1
+        queue.append(nxt)
+
+
+print(*dfs_lst)
+print(*bfs_lst)
