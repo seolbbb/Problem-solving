@@ -1,14 +1,14 @@
 import sys
-N = int(sys.stdin.readline().rstrip())
-lst = []
+input = sys.stdin.readline
 
-for i in range(N):
-    lst.append(str(sys.stdin.readline().rstrip()))
+n = int(input())
+s = set()
 
-uniq = set(lst)
-uniq_lst = list(uniq)
-uniq_lst.sort()
-uniq_lst.sort(key=len)
+for _ in range(n):
+    s.add(input().rstrip())
 
-for i in uniq_lst:
-    print(i)
+lst = list(s)
+
+lst.sort(key=lambda x:(len(x), x))
+
+print(*lst, sep='\n')
