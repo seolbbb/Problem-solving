@@ -1,33 +1,31 @@
 import sys
+input = sys.stdin.readline
 
 while True:
-    s = sys.stdin.readline().rstrip()
-    lst = []
-    no = 0
-    if s == '.':
+    sen = input().rstrip()
+    if sen == '.':
         break
-    for x in s:
-        if x == '(' or x == '[':
-            lst.append(x)
-        if x == ')':
-            if not lst:
-                no = 1
-                break
-            elif lst[-1] == '(':
+
+    lst = []
+    ans = 'yes'
+
+    for char in sen:
+        if char == '[' or char == '(':
+            lst.append(char)
+        elif char == ']':
+            if lst and lst[-1] == '[':
                 lst.pop()
             else:
-                no = 1
+                ans = 'no'
                 break
-        if x == ']':
-            if not lst:
-                no = 1
-                break
-            elif lst[-1] == '[':
+        elif char == ')':
+            if lst and lst[-1] == '(':
                 lst.pop()
             else:
-                no = 1
+                ans = 'no'
                 break
-    if lst or no == 1:
-        print('no')
-    else:
-        print('yes')
+    
+    if lst:
+        ans = 'no'
+
+    print(ans)
