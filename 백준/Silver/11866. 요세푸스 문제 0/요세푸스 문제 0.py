@@ -1,26 +1,16 @@
-n ,k = map(int,input().split())
-nums = [i+1 for i in range(n)]
-per = []
-i = 0
-length = n
+import sys
+from collections import deque
+input = sys.stdin.readline
 
-a = 0
+n, k = map(int, input().split())
 
-while True:
-    for j in range(k-1):
-        if i == len(nums)-1:
-            i = 0
-        else:
-            i += 1
+queue = deque([i for i in range(1, n+1)])
+p = []
 
+while queue:
+    queue.rotate(-k+1)
+    p.append(queue.popleft())
 
-    per.append(str(nums.pop(i)))
-    if i > len(nums)-1:
-        i = 0
-
-    if len(nums) == 0:
-        break
-    a += 1
-
-
-print('<' + ", ".join(per) + '>')
+print('<', end='') 
+print(*p, sep=', ', end='')
+print('>')
