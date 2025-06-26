@@ -1,13 +1,12 @@
 import sys
+input = sys.stdin.readline
 
-n, m = map(int,sys.stdin.readline().split())
-password = {}
+n, m = map(int, input().split())
+pwd = {}
 
+for _ in range(n):
+    site, password = input().rstrip().split()
+    pwd[site] = password
 
-for i in range(n):
-    a, b = map(str,sys.stdin.readline().rstrip().split())
-
-    password[a] = b
-
-for i in range(m):
-    print(password[sys.stdin.readline().rstrip()])
+for _ in range(m):
+    print(pwd[input().rstrip()])
