@@ -1,11 +1,10 @@
-import sys
+n = int(input())
+time = list(map(int, input().split()))
+ans = 0
 
-sum = 0
-n = int(sys.stdin.readline())
-m = list(map(int,sys.stdin.readline().split()))
-m.sort()
+time.sort()
 
-for i in range(n):
-    sum += (n-i)*m[i]
+for i in range(1, n+1):
+    ans += sum(time[0:i])
 
-print(sum)
+print(ans)
