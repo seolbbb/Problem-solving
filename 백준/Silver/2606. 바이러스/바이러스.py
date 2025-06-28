@@ -1,36 +1,29 @@
-import sys
 from collections import deque
-
-def dfs(cur):
-    vis[cur] = 1
-    for nxt in adj[cur]:
-        if vis[nxt]:
-            continue
-        dfs(nxt)
-
-def bfs():
-    queue.append(1)
-    vis[1] = 1
-    while queue:
-        cur = queue.popleft()
-        for nxt in adj[cur]:
-            if vis[nxt]:
-                continue
-            queue.append(nxt)
-            vis[nxt] = 1
 
 n = int(input())
 m = int(input())
-adj = [[] for _ in range(101)]
-vis = [0 for _ in range(101)]
+
+graph = [[] for _ in range(n+1)]
+visit = [0 for _ in range(n+1)]
 queue = deque()
-num = 0
+cnt = 0
 
 for _ in range(m):
-    u, v = map(int,input().split())
-    adj[u].append(v)
-    adj[v].append(u)
+    a, b = map(int, input().split())
+    graph[a].append(b)
+    graph[b].append(a)
 
-bfs()
+queue.append(1)
+visit[1] = 1
 
-print(sum(vis) - 1)
+while queue:
+    cur = queue.popleft()
+
+    for nxt in graph[cur]:
+        if visit[nxt] == 1:
+            continue
+        queue.append(nxt)
+        visit[nxt] = 1
+        cnt += 1
+
+print(cnt)
