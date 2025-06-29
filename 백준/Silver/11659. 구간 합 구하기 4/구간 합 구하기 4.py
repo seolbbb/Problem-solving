@@ -1,18 +1,13 @@
 import sys
 input = sys.stdin.readline
 
-n,m = map(int,input().split())
-n_lst = list(map(int,input().split()))
+n, m = map(int, input().split())
+num = list(map(int, input().split()))
+pre = [0 for _ in range(n+1)]
 
-pre = []
-x = 0
-for i in range(n):
-    x += n_lst[i]
-    pre.append(x)
+for idx, i in enumerate(num):
+    pre[idx+1] = pre[idx] + i
 
 for _ in range(m):
-    i,j = map(int,input().split())
-    if i == 1:
-        print(pre[j-1])
-    else:
-        print(pre[j-1] - pre[i-2])
+    s, e = map(int, input().split())
+    print(pre[e] - pre[s-1])
