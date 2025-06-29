@@ -1,19 +1,17 @@
-import sys
-from collections import defaultdict
-input = sys.stdin.readline
-
 t = int(input())
 
 for _ in range(t):
     n = int(input())
-    cat = defaultdict(int)
-    cnt = 1
+    cnt = dict()
+    ans = 1
 
     for _ in range(n):
-        i, c = input().rstrip().split()
-        cat[c] += 1
+        item, category = input().split()
+        cnt[category] = cnt.get(category, 0) + 1
     
-    for val in cat.values():
-        cnt *= val + 1
+    for num in cnt.values():
+        ans *= num+1
+    
+    ans -= 1
 
-    print(cnt-1)
+    print(ans)
