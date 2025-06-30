@@ -1,34 +1,20 @@
-import sys
-input = sys.stdin.readline
+eq = input()
+num = ''
+lst = [[] for _ in range(51)]
+i = 1
+ans = 0
 
-seq = input().rstrip()
-temp = ''
-prev = 0
-minus = 0
-total = 0
 
-for s in seq:
-    if s == '+':
-        prev += int(temp)
-        temp = ''
-    elif s == '-':
-        prev += int(temp)
-        temp = ''
-        if minus == 1:
-            total -= prev
-            prev = 0
-        else:
-            total += prev
-            prev = 0
-            minus = 1
+for c in eq:
+    if c.isnumeric():
+        num += c
+    elif c == '+':
+        lst[i].append(int(num))
+        num = ''
     else:
-        temp += s
+        lst[i].append(int(num))
+        num = ''
+        i += 1
+lst[i].append(int(num))
 
-prev += int(temp)
-
-if minus == 1:
-    total -= prev
-else:
-    total += prev
-
-print(total)
+print(-(sum([sum(x) for x in lst]) - 2*sum(lst[1])))
