@@ -1,20 +1,18 @@
 import sys
 input = sys.stdin.readline
 
-k,n = map(int,input().split())
-cable = [int(input()) for _ in range(k)]
+k, n = map(int, input().split())
+line = [int(input()) for _ in range(k)]
 left = 1
-right = max(cable)
+right = max(line)
 
-while right >= left:
+while left <= right:
     mid = (left+right) // 2
-    temp = 0
-    for c in cable:
-        temp += c // mid
-    
-    if temp < n:
-        right = mid -1
+    cnt = sum(map(lambda x: x//mid, line))
+
+    if cnt >= n:
+        left = mid+1
     else:
-        left = mid + 1
-    
+        right = mid-1
+
 print(right)
