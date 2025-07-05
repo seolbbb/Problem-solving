@@ -9,7 +9,7 @@ right = max(height)
 
 while left <= right:
     mid = (left + right) // 2
-    tree = sum([h - mid for h in height if h > mid])
+    tree = sum(h - mid for h in height if h > mid)
 
     if tree >= m:
         left = mid + 1
