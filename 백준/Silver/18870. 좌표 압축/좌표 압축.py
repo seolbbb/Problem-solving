@@ -1,18 +1,13 @@
 import sys
+input = sys.stdin.readline
 
-n = int(sys.stdin.readline())
-lst = list(map(int,sys.stdin.readline().split()))
-lst_sort = sorted(lst,reverse=True)
-nums = {}
+n = int(input())
+lst = list(map(int, input().split()))
+idx = {}
+i = 0
 
-for key in lst_sort:
-    nums[key] = 1
+for k in sorted(set(lst)):
+    idx[k] = i
+    i += 1
 
-k = len(nums)-1
-
-for key in nums.keys():
-    nums[key] = k
-    k -= 1
-
-for key in lst:
-    print(nums[key], end = ' ')
+print(*[idx[m] for m in lst])
