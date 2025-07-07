@@ -2,27 +2,9 @@ import sys
 from collections import deque
 input = sys.stdin.readline
 
-def bfs(start):
-    dist = [-1 for _ in range(n+1)]
-    queue = deque()
-    queue.append(start)
-    dist[start] = 0
-
-    while queue:
-        cur = queue.popleft()
-
-        for nxt in graph[cur]:
-            if dist[nxt] >= 0:
-                continue
-            queue.append(nxt)
-            dist[nxt] = dist[cur] + 1
-
-    return sum(dist)
-
 n, m = map(int, input().split())
 graph = [[] for _ in range(n+1)]
-k_num = float('inf')
-ans = 0
+bacon_number = []
 
 for _ in range(m):
     a, b = map(int, input().split())
@@ -30,9 +12,21 @@ for _ in range(m):
     graph[b].append(a)
 
 for i in range(1, n+1):
-    tmp = bfs(i)
-    if k_num > tmp:
-        k_num = tmp
-        ans = i
+    dist = [-1 for _ in range(n+1)]
+    queue = deque([i])
+    dist[i] = 0
 
-print(ans)
+    while queue:
+        cur = queue.popleft()
+
+        for nxt in graph[cur]:
+            if dist[nxt] != -1:
+                continue
+            dist[nxt] = dist[cur] + 1
+            queue.append(nxt)
+    
+    bacon_number.append((i, sum(dist)+1))
+
+bacon_number.sort(key=lambda x: (x[1], x[0]))
+
+print(bacon_number[0][0])
