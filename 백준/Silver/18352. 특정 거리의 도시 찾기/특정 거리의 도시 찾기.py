@@ -20,7 +20,8 @@ dist[x] = 0
 
 while queue:
     cur = queue.popleft()
-
+    if dist[cur] > k:
+        break
     for nxt in graph[cur]:
         if dist[nxt] >= 0:  # 이미 방문했으면 continue
             continue
