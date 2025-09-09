@@ -5,14 +5,14 @@
 def solution(msg):
     answer = []
     indices = {}
-    cnt = 1
+    cnt = 0
     last = 27
     
     for i in range(26):
         indices[chr(65 + i)] = i + 1
         
     for i in range(len(msg)):
-        if cnt > 1:
+        if cnt > 0:
             cnt -= 1
             continue
         cur_msg = msg[i]
